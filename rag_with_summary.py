@@ -71,10 +71,10 @@ class Model:
             model_path, trust_remote_code=True,
             torch_dtype=torch.float16, device_map='auto'
         )
-        self.pipeline = TextGenerationPipeline(
-            model=self.model, tokenizer=self.tokenizer,
-            device=self.model.device, max_new_tokens=512, do_sample=False
-        )
+        # self.pipeline = TextGenerationPipeline(
+        #     model=self.model, tokenizer=self.tokenizer,
+        #     device=self.model.device, max_new_tokens=512, do_sample=False
+        # )
 
     def generate(self, prompt_text):
         messages = [

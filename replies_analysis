@@ -1,0 +1,23 @@
+def compute_counts(df: pd.DataFrame,
+                         content_col: str = 'content',
+                         terms: list[str] | None = None
+                        ) -> pd.Series:
+    texts = df[content_col].fillna('').astype(str)
+
+    lengths = texts.str.len().astype(float)
+
+    if not terms:
+        return lengths
+
+    def count_term_chars(text: str, terms: list) -> int:
+        total_chars = 0
+        for w in terms:
+            occ = text.count(w)
+            total_chars += occ * len(w)
+        return total_chars
+
+    # 假设 texts 是 pd.Series，每条是一段回复
+    counts_chars = texts.map(lambda t: count_term_chars(t, terms)).astype(float)
+    # 用 replace(0,1) 防止除以0
+    proportions = counts_chars / lengths.replace(0, 1)
+    return proportions

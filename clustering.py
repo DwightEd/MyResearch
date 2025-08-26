@@ -175,13 +175,5 @@ def main():
         json.dump(clusters, f, ensure_ascii=False, indent=2)
     print(f"已保存聚类聚合结果到：{OUTPUT_JSON}")
 
-    # 8) 打印 topic 概览
-    print("\nTopic 概览：")
-    print(topic_info.head(40).to_string(index=False))
-
-    # 可视化（若需要在 notebook 或支持图形的环境中）
-    # topic_model.visualize_topics().show()
-    # topic_model.visualize_barchart(top_n_topics=10).show()
-
 if __name__ == "__main__":
     main()
